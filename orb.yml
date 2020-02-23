@@ -35,7 +35,7 @@ jobs:
           paths:
             - ~/.ivy2
           key: v1-dependencies--{{ checksum "build.sbt" }}
-      - run: sbt coverage test:test coverageReport
+      - run: sbt coverage "+ test:test" coverageReport
       - store_test_results:
           path: target
       - codecov/upload:
@@ -56,4 +56,4 @@ jobs:
           mkdir -p .gnupg
           echo $GPG_SEC | base64 --decode > .gnupg/secring.asc
           echo $GPG_PUB | base64 --decode > .gnupg/pubring.asc
-          sbt releaseEarly
+          sbt "+ releaseEarly"
